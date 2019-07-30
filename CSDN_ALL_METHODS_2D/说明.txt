@@ -1,0 +1,8 @@
+chan算法及其加入角度信息后的比较
+
+ChanAlgorithm——基本Chan算法
+ChanAlgorithm_A——加入角度信息后的Chan算法,需要注意Chan算法的B矩阵
+test——测试文件
+
+CHANFUC——刘老师编的Chan算法，经比较后，小区半径并不影响定位精度。
+chan4是对CHANFUC的测试。

@@ -1,0 +1,33 @@
+r=[500, 1000, 1500, 2000, 3000, 4000];  %r为半径
+total = [0, 0, 0, 0, 0, 0];
+Noise = 50;
+for i = 1: 6,
+    for m = 1: 10000,
+        ms=[100;300];
+        bs1=[0,0,0]; %服务基站BS0的坐标
+        bs2=[0,sqrt(3)*r(i),0];
+        bs3=[3*r(i)/2,sqrt(3)*r(i)/2,0]; 
+        bs4=[-3*r(i)/2,-sqrt(3)*r(i)/2,0];
+        bs5=[-3*r(i)/2,sqrt(3)*r(i)/2,0];
+        bs6=[3*r(i)/2,-sqrt(3)*r(i)/2,0];
+        bs7=[0,-sqrt(3)*r(i),0];
+        r1=sqrt((bs1(1)-ms(1))^2+(bs1(2)-ms(2))^2); 
+        bs2(3)=sqrt((bs2(1)-ms(1))^2+(bs2(2)-ms(2))^2)-r1;
+        bs2(3)=bs2(3)+ Noise*randn(1); 
+        bs3(3)=sqrt((bs3(1)-ms(1))^2+(bs3(2)-ms(2))^2)-r1;
+        bs3(3)=bs3(3)+ Noise*randn(1); 
+        bs4(3)=sqrt((bs4(1)-ms(1))^2+(bs4(2)-ms(2))^2)-r1;
+        bs4(3)=bs4(3)+ Noise*randn(1);
+        bs5(3)=sqrt((bs5(1)-ms(1))^2+(bs5(2)-ms(2))^2)-r1;
+        bs5(3)=bs5(3)+ Noise*randn(1);
+        bs6(3)=sqrt((bs6(1)-ms(1))^2+(bs6(2)-ms(2))^2)-r1;
+        bs6(3)=bs6(3)+ Noise*randn(1);
+        bs7(3)=sqrt((bs7(1)-ms(1))^2+(bs7(2)-ms(2))^2)-r1;
+        bs7(3)=bs7(3)+ Noise*randn(1);
+        bs=[bs1;bs2;bs3;bs4;bs5;bs6;bs7];
+        n=7;    
+        ms1 = CHANFUC(n,bs);
+        total(i) = (ms1(1) - ms(1))^2 +  (ms1(1) - ms(1))^2 + total(i);
+    end
+    rmse(i) = sqrt(total(i)/10000);
+end
